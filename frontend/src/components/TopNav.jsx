@@ -12,6 +12,8 @@ import {
   MessageSquare,
   Check,
 } from 'lucide-react';
+import { logout } from '../firebase/auth';
+import { useAuth } from '../firebase/useAuth';
 
 /**
  * UtilityBar — desktop-only right-side controls (bell, settings, avatar).
@@ -22,6 +24,7 @@ export default function TopNav() {
   const [unreadCount, setUnreadCount] = useState(3);
   const navRef = useRef(null);
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
   // Close dropdown on click outside or Escape key
   useEffect(() => {
@@ -50,6 +53,12 @@ export default function TopNav() {
   const handleMarkAllRead = (e) => {
     e.stopPropagation();
     setUnreadCount(0);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    setActiveDropdown(null);
+    navigate('/');
   };
 
   const sampleNotifications = [
@@ -212,7 +221,7 @@ export default function TopNav() {
                 <div style={{ height: '1px', backgroundColor: 'var(--border-color)', margin: '6px 0' }} />
                 <button
                   className="dropdown-item danger"
-                  onClick={() => setActiveDropdown(null)}
+                  onClick={handleLogout}
                 >
                   <LogOut size={18} />
                   <span>Logout</span>
@@ -261,10 +270,10 @@ export default function TopNav() {
                   </div>
                   <div>
                     <div style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-main)' }}>
-                      Asha Devi
+                      {currentUser?.displayName || 'Asha Devi'}
                     </div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                      Senior Member
+                      {currentUser?.email || 'Senior Member'}
                     </div>
                   </div>
                 </div>
@@ -294,7 +303,7 @@ export default function TopNav() {
 
                 <button
                   className="dropdown-item danger"
-                  onClick={() => setActiveDropdown(null)}
+                  onClick={handleLogout}
                 >
                   <LogOut size={18} />
                   <span>Logout</span>
