@@ -1,6 +1,18 @@
+# Environment variables
+.env
+.env.*
+.env.local
+.env.*.local
+
+# Firebase service account credentials
+serviceAccountKey.json
+backend/serviceAccountKey.json
+*.firebase-adminsdk-*.json
+
 # Python
 __pycache__/
 *.py[cod]
+*.pyo
 *$py.class
 *.so
 .Python
@@ -23,12 +35,6 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-
-# Environment variables & Secrets
-.env
-.env.local
-.env.*.local
-serviceAccountKey.json
 
 # Testing & Coverage
 .pytest_cache/
