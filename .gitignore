@@ -1,0 +1,26 @@
+# Environment variables
+.env
+.env.*
+
+# Firebase service account credentials
+serviceAccountKey.json
+backend/serviceAccountKey.json
+*.firebase-adminsdk-*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
